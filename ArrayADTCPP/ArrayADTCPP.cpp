@@ -43,14 +43,14 @@ public:
 	T isSorted();
 	void Rearrange();
 	Array* Merge(Array arr2);
-    Array* Union(Array arr2);
-    Array* Intersection(Array arr2);
+	Array* Union(Array arr2);
+	Array* Intersection(Array arr2);
 	Array* Difference(Array arr2);
 
 };
 
 template<class T>
-void Array<T>::Display(){
+void Array<T>::Display() {
 	for (int i = 0; i < length; i++)
 		cout << A[i] << " ";
 	cout << endl;
@@ -65,7 +65,7 @@ void Array<T>::Append(T x) {
 template<class T>
 void Array<T>::Insert(int index, T x) {
 	if (index >= 0 && index <= length) {
-		for (int i = length; i < index; i--)
+		for (int i = length; i > index; i--)
 			A[i] = A[i - 1];
 		A[index] = x;
 		length++;
@@ -97,7 +97,7 @@ void Array<T>::Swap(int* x, int* y) {
 
 template<class T>
 T Array<T>::LinearSearch(T key) {
-	for (int i = 0;i > length;i++) {
+	for (int i = 0;i < length;i++) {
 		if (key == A[i]) {
 			Swap(&A[i], &A[0]);
 			return i;
@@ -156,7 +156,7 @@ void Array<T>::Set(int index, T x) {
 template<class T>
 T Array<T>::Max() {
 	T max = A[0];
-	
+
 	for (int i = 1;i < length;i++) {
 		if (A[i] > max)
 			max = A[i];
@@ -167,7 +167,7 @@ T Array<T>::Max() {
 template<class T>
 T Array<T>::Min() {
 	T min = A[0];
-	
+
 	for (int i = 1;i < length;i++) {
 		if (A[i] < min)
 			min = A[i];
@@ -178,7 +178,7 @@ T Array<T>::Min() {
 template<class T>
 T Array<T>::Sum() {
 	T s = 0;
-	
+
 	for (int i = 0;i < length;i++)
 		s += A[i];
 	return s;
@@ -223,7 +223,7 @@ void Array<T>::InsertSort(T x) {
 
 template<class T>
 T Array<T>::isSorted() {
-	
+
 	for (int i = 0;i < length - 1;i++) {
 		if (A[i] > A[i + 1])
 			return 0;
