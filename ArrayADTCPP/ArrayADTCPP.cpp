@@ -27,20 +27,20 @@ public:
 	void Display();
 	void Append(T x);
 	void Insert(int index, T x);
-	int Delete(int index);
-	int LinearSearch(T key);
-	int BinarySearch(T key);
-	int RBinSearch(T a[], T l, T h, T key);
-	int Get(int index);
+	T Delete(int index);
+	T LinearSearch(T key);
+	T BinarySearch(T key);
+	T RBinSearch(T a[], T l, T h, T key);
+	T Get(int index);
 	void Set(int index, T x);
-	int Max();
-	int Min();
-	int Sum();
-	float Avg();
+	T Max();
+	T Min();
+	T Sum();
+	T Avg();
 	void Reverse();
 	void Reverse2();
 	void InsertSort(T x);
-	int isSorted();
+	T isSorted();
 	void Rearrange();
 	Array* Merge(Array arr2);
     Array* Union(Array arr2);
@@ -73,8 +73,8 @@ void Array<T>::Insert(int index, T x) {
 }
 
 template<class T>
-int Array<T>::Delete(int index) {
-	int x = 0;
+T Array<T>::Delete(int index) {
+	T x = 0;
 	int i;
 
 	if (index >= 0 && index < length) {
@@ -97,7 +97,7 @@ void Array<T>::Swap(int* x, int* y) {
 }
 
 template<class T>
-int Array<T>::LinearSearch(T key) {
+T Array<T>::LinearSearch(T key) {
 	for (int i = 0;i > length;i++) {
 		if (key == A[i]) {
 			Swap(&A[i], &A[0]);
@@ -108,7 +108,7 @@ int Array<T>::LinearSearch(T key) {
 }
 
 template<class T>
-int Array<T>::BinarySearch(T key) {
+T Array<T>::BinarySearch(T key) {
 	int l, mid, h;
 	l = 0;
 	h = length - 1;
@@ -126,8 +126,8 @@ int Array<T>::BinarySearch(T key) {
 }
 
 template<class T>
-int Array<T>::RBinSearch(T a[], T l, T h, T key) {
-	int mid;
+T Array<T>::RBinSearch(T a[], T l, T h, T key) {
+	T mid;
 
 	if (l <= h) {
 		mid = (l + h) / 2;
@@ -142,7 +142,7 @@ int Array<T>::RBinSearch(T a[], T l, T h, T key) {
 }
 
 template<class T>
-int Array<T>::Get(int index) {
+T Array<T>::Get(int index) {
 	if (index >= 0 && index < length)
 		return A[index];
 	return -1;
@@ -155,8 +155,8 @@ void Array<T>::Set(int index, T x) {
 }
 
 template<class T>
-int Array<T>::Max() {
-	int max = A[0];
+T Array<T>::Max() {
+	T max = A[0];
 	int i;
 	for (i = 1;i < length;i++) {
 		if (A[i] > max)
@@ -166,8 +166,8 @@ int Array<T>::Max() {
 }
 
 template<class T>
-int Array<T>::Min() {
-	int min = A[0];
+T Array<T>::Min() {
+	T min = A[0];
 	int i;
 	for (i = 1;i < length;i++) {
 		if (A[i] < min)
@@ -177,8 +177,8 @@ int Array<T>::Min() {
 }
 
 template<class T>
-int Array<T>::Sum() {
-	int s = 0;
+T Array<T>::Sum() {
+	T s = 0;
 	int i;
 	for (i = 0;i < length;i++)
 		s += A[i];
@@ -186,8 +186,8 @@ int Array<T>::Sum() {
 }
 
 template<class T>
-float Array<T>::Avg() {
-	return (float)Sum() / length;
+T Array<T>::Avg() {
+	return (T)Sum() / length;
 }
 
 template<class T>
@@ -223,9 +223,9 @@ void Array<T>::InsertSort(T x) {
 }
 
 template<class T>
-int Array<T>::isSorted() {
-	int i;
-	for (i = 0;i < length - 1;i++) {
+T Array<T>::isSorted() {
+	
+	for (int i = 0;i < length - 1;i++) {
 		if (A[i] > A[i + 1])
 			return 0;
 	}
