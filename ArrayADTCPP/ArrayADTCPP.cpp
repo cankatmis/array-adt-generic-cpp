@@ -397,11 +397,11 @@ void Array<T>::FlagMissingElement() {
 
 	Array* H = new Array(length);
 
-	for (T i = 0; i < length; i++)
+	for (int i = 0; i < length; i++)
 	{
 		H[A[i]]++;
 	}
-	for (T i = 0; i < length; i++)
+	for (int i = 0; i < length; i++)
 	{
 		if (H[i] == 0)
 			printf("%d ", i);
