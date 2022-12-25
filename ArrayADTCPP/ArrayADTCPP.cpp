@@ -50,7 +50,15 @@ public:
 	T SingleMissingElement1();
 	void SingleMissingElements();
 	void FlagMissingElement();
-
+	void FindDuplicateSorted();
+	void FindDuplicateSortedCount();
+	void FindDuplicateSortedHash();
+	void FindDuplicateUnsorted();
+	void FindDuplicateUnsortedHash();
+	void PairSum(T element);
+	void PairSumHash(int element);
+	void PairSumSorted(int element);
+	void MinMax();
 
 };
 
@@ -396,17 +404,175 @@ template<class T>
 void Array<T>::FlagMissingElement() {
 
 	Array* H = new Array(length);
+	H->length = length;
 
 	for (int i = 0; i < length; i++)
 	{
 		H[A[i]]++;
 	}
-	for (int i = 0; i < length; i++)
+	for (int i = 0; i < H->length; i++)
 	{
 		if (H[i] == 0)
 			printf("%d ", i);
 	}
 }
+
+template<class T>
+void Array<T>::FindDuplicateSorted() {
+	T lastDuplicate;
+	for (int i = 0; i < length; i++)
+	{
+		if (A[i] == A[i + 1] && lastDuplicate != A[i])
+		{
+			printf("%d\n", A[i]);
+			lastDuplicate = A[i];
+		}
+	}
+}
+
+template<class T>
+void Array<T>::FindDuplicateSortedCount() {
+
+	int j;
+
+	for (int i = 0; i < length - 1; i++)
+	{
+		if (A[i] == A[i + 1])
+		{
+			j = i + 1;
+			while (A[j] == A[i]) j++;
+			printf("%d is appeared %d times.", A[i], j - i);
+			i = j - 1;
+		}
+	}
+}
+
+//hash table array duplicate
+template<class T>
+void Array<T>::FindDuplicateSortedHash() {
+	Array* H = new Array(A[length - 1]);
+	H->A = { 0 };
+	H->length = A[length - 1];
+	for (int i = 0; i < length; i++)
+	{
+		H[A[i]]++;
+	}
+	for (int i = 0; i < H->length; i++)
+	{
+		if (H[i] > 1) printf("%d is presented %d times.", i, H[i]);
+	}
+}
+
+//unsorted duplicate
+template<class T>
+void Array<T>::FindDuplicateUnsorted() {
+
+	for (int i = 0; i < length - 1; i++)
+	{
+		int count = 1;
+		if (A[i] != -1)
+		{
+			for (int j = i + 1; j < length; j++)
+			{
+				if (A[i] == A[j])
+				{
+					count++;
+					A[j] = -1;
+				}
+			}
+			printf("%d %d", A[i], count);
+		}
+	}
+}
+
+//find duplicate unsorted hashtable array
+template<class T>
+void Array<T>::FindDuplicateUnsortedHash() {
+
+	Array* H = new Array(Max(A));
+	H->A = { 0 };
+	H->length = Max(A);
+
+	for (int i = 0; i < length; i++)
+	{
+		if (A[i] == A[i + 1])
+		{
+			H[A[i]]++;
+		}
+	}
+	for (int i = 0; i < H->length; i++)
+	{
+		if (H[i] > 1)
+		{
+			printf("%d is presented %d times.", i, H[i]);
+		}
+	}
+}
+
+
+template<class T>
+void Array<T>::PairSum(T element) {
+	for (int i = 0; i < length - 1; i++)
+	{
+		for (int j = i + 1; j < length; j++)
+		{
+			if (A[i] + A[j] == element)
+			{
+				printf("(%d,%d)=%d", A[i], A[j], element);
+			}
+		}
+	}
+
+}
+
+template<class T>
+void Array<T>::PairSumHash(int element) {
+
+	Array* H = new Array(Max(A));
+	H->A = { 0 };
+	H->length = Max(A);
+
+	for (int i = 0; i < length; i++)
+	{
+		if (H[element - A[i] != 0)
+		{
+			printf("(%d,%d) = %d", A[i], element - A[i], element);
+		}
+		H[A[i]]++;
+	}
+}
+
+template<class T>
+void Array<T>::PairSumSorted(int element) {
+	int i = 0;
+	int j = length - 1;
+	// for(i = 0, j = length -1 ; i<j ; )
+	while (i < j)
+	{
+		if (A[i] + A[j] == element) {
+			printf("(%d,%d) = %d", A[i], A[j], k);
+			i++;
+			j--;
+		}
+		else if (A[i] + A[j] < element) i++;
+		else j++;
+	}
+}
+
+template<class T>
+void Array<T>::MinMax() {
+
+	int min = A[0];
+	int max = A[0];
+
+	for (int i = 1; i < length; i++)
+	{
+		if (A[i] < min) min = A[i];
+		else if (A[i] > max) max = A[i];
+		printf("Min: %d, Max: %d", min, max);
+	}
+}
+
 
 
 int main()
