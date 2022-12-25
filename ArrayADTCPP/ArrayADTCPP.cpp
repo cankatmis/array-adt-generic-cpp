@@ -46,6 +46,11 @@ public:
 	Array* Union(Array arr2);
 	Array* Intersection(Array arr2);
 	Array* Difference(Array arr2);
+	T SingleMissingElement();
+	T SingleMissingElement1();
+	void SingleMissingElements();
+	void FlagMissingElement();
+
 
 };
 
@@ -273,7 +278,7 @@ Array<T>* Array<T>::Union(Array arr2) {
 	int i, j, k;
 	i = j = k = 0;
 
-	struct Array* arr3 = new Array(length + arr2.length);
+	Array* arr3 = new Array(length + arr2.length);
 
 	while (i < length && j < arr2.length) {
 		if (A[i] < arr2.A[j])
@@ -300,7 +305,7 @@ Array<T>* Array<T>::Intersection(Array arr2) {
 	int i, j, k;
 	i = j = k = 0;
 
-	struct Array* arr3 = new Array(length + arr2.length);
+	Array* arr3 = new Array(length + arr2.length);
 
 	while (i < length && j < arr2.length) {
 		if (A[i] < arr2.A[j])
@@ -322,7 +327,7 @@ Array<T>* Array<T>::Difference(Array arr2) {
 	int i, j, k;
 	i = j = k = 0;
 
-	struct Array* arr3 = new Array(length + arr2.length);
+	Array* arr3 = new Array(length + arr2.length);
 
 	while (i < length && j < arr2.length) {
 		if (A[i] < arr2.A[j])
@@ -341,6 +346,66 @@ Array<T>* Array<T>::Difference(Array arr2) {
 	arr3->length = k;
 
 	return arr3;
+}
+
+template<class T>
+T Array<T>::SingleMissingElement() {
+	T sum = A[length - 1] * (A[length - 1] + 1) / 2;
+	T result;
+	if (Sum() != sum)
+	{
+		result = sum - Sum();
+		return result;
+	}
+	return 1;
+}
+
+//Random starting point
+template<class T>
+T Array<T>::SingleMissingElement1() {
+	T difference = A[0];
+	T element;
+
+	for (int i = 0; i < length; i++)
+	{
+		if (A[i] - i != difference) {
+			element = i + difference;
+			return element;
+		}
+	}
+	return -1;
+}
+
+template<class T>
+void Array<T>::SingleMissingElements() {
+	T difference = A[0];
+
+	for (int i = 0; i < length; i++)
+	{
+		if (A[i] - i != difference) {
+			while (difference < A[i] - i) {
+				printf("%d\n", i + difference);
+				difference++;
+			}
+		}
+	}
+}
+
+//missing element using flags
+template<class T>
+void Array<T>::FlagMissingElement() {
+
+	Array* H = new Array(length);
+
+	for (T i = 0; i < length; i++)
+	{
+		H[A[i]]++;
+	}
+	for (T i = 0; i < length; i++)
+	{
+		if (H[i] == 0)
+			printf("%d ", i);
+	}
 }
 
 
